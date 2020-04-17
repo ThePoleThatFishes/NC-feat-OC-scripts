@@ -64,12 +64,12 @@ function info()
 	fisrStats["Heat Mult.:"] = mult_hu .. "%"
 	fisrStats["Status:"] = stat
 	print("Size: " .. fisrStats["Size:"])
-  print("Cells: " .. fisrStats["Cells:"])
-  print("Eff. Mult.: " .. fisrStats["Eff. Mult.:"])
-  print("Heat Mult.: " .. fisrStats["Heat Mult.:"])
-  print("Energy: " .. fisrStats["Energy:"])
-  print("Heat: " .. fisrStats["Heat:"])
-  print("Status: " .. fisrStats["Status:"] .. \n)
+  	print("Cells: " .. fisrStats["Cells:"])
+  	print("Eff. Mult.: " .. fisrStats["Eff. Mult.:"])
+  	print("Heat Mult.: " .. fisrStats["Heat Mult.:"])
+  	print("Energy: " .. fisrStats["Energy:"])
+  	print("Heat: " .. fisrStats["Heat:"])
+  	print("Status: " .. fisrStats["Status:"] .. \n)
 	print("Fuel Info")
 	fuelInfo = {}
 	fuelInfo["Fuel:"] = fuel
@@ -79,19 +79,19 @@ function info()
 	fuelInfo["Net Heating:"] = net_hu .. "HU/t"
 	fuelInfo["Time Left:"] = timeleft/20 .. "sec"
 	print("Fuel: " .. fuelInfo["Fuel:"])
-  print("Base Power/Heat: " .. fuelInfo["Base Power:"] .. "-" .. fuelInfo["Base Heat:"])
-  print("Energy Produced: " .. fuelInfo["Energy Produced:"])
-  print("Net Heating: " .. fuelInfo["Net Heating:"])
-  print("Time Left: " .. fuelInfo["Time Left:"])  
+  	print("Base Power/Heat: " .. fuelInfo["Base Power:"] .. "-" .. fuelInfo["Base Heat:"])
+  	print("Energy Produced: " .. fuelInfo["Energy Produced:"])
+  	print("Net Heating: " .. fuelInfo["Net Heating:"])
+  	print("Time Left: " .. fuelInfo["Time Left:"])  
 end
 
 
 function runReactor()
 	while True do
 		permReactorStats()
-    fuelStats()
+                fuelStats()
 		reactorStats()
-    reactorControl()
+    		reactorControl()
 		reactorStatus()
 		info()		
 		os.sleep(3)
