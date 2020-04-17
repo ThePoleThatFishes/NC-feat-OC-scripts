@@ -26,7 +26,7 @@ function fuelStats()
 	fuel_rf_t = fisr.getFissionFuelPower()
 	fuel_hu_t = fisr.getFissionFuelHeat()
 	rf_t = fisr.getReactorProcessPower()
-	net_hu = fisr.getReactorCoolingRate()
+	net_hu = fisr.getReactorProcessHeat()
 	return fuel, fuel_rf_t, fuel_hu_t, rf_t, net_hu
 end
 
