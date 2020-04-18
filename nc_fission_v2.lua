@@ -19,7 +19,7 @@ function fuelStats()
 	fuel_rf_t = fisr.getFissionFuelPower()
 	fuel_hu_t = fisr.getFissionFuelHeat()
 	rf_t = fisr.getReactorProcessPower()
-	net_hu = fisr.getReactorCoolingRate()
+	net_hu = fisr.getReactorProcessHeat()
 	return fuel, fuel_rf_t, fuel_hu_t, rf_t, net_hu
 end
 
@@ -61,15 +61,13 @@ function infoOutput()
 	fisrStats["Cells: "] = no_cells
 	fisrStats["Eff. Mult.: "] = mult_rf .. "%"
 	fisrStats["Heat Mult.: "] = mult_hu .. "%"
-	fisrStats["Energy: "] = rf .. "/" .. max_rf .. " RF"
-	fisrStats["Heat: "] = hu .. "/" .. max_hu .. " HU"
+	fisrStats["Energy: "] = rf .. "/" .. max_rf .. " RF " .. "(+" .. rf_t .. " RF/t)"
+	fisrStats["Heat: "] = hu .. "/" .. max_hu .. " HU " .. "(" .. net_hu .. " HU/t)"
 	fisrStats["Status: "] = stat
-	fuelInfoNames = {"Fuel: ", "Base Power-Heat: ", "Energy Produced: ", "Net Heating: ", "Time Left: "}
+	fuelInfoNames = {"Fuel: ", "Base Power-Heat: ", "Time Left: "}
 	fuelInfo = {}
 	fuelInfo["Fuel: "] = fuel
 	fuelInfo["Base Power-Heat: "] = fuel_rf_t .. " RF/t - " .. fuel_hu_t .. " HU/t"
-	fuelInfo["Energy Produced: "] = rf_t .. " RF/t"
-	fuelInfo["Net Heating: "] = net_hu .. " HU/t"
 	fuelInfo["Time Left: "] = timeleft/20 .. " sec"
 end
 
@@ -81,11 +79,11 @@ function fisrInit()
 	reactorStatus()
 	print("Reactor Info")
 	for k1, v1 in ipairs(fisrStatsNames) do
-		print(fisrStats[v1])
+		print(v1 .. fisrStats[v1])
 	end
 	print("Fuel Info")
 	for k2, v2 in ipairs(fuelInfoNames) do
-		print(fuelInfo[v2])
+		print(v2 .. fuelInfo[v2])
 	end
 end
 
@@ -95,19 +93,23 @@ function fisrRun()
 		reactorControl()
 		reactorStatus()
 		infoOutput()
-		clearLines = {6, 7, 8, 13}
+		clearLines = {6, 7, 8, 12}
 		for k3, v3 in ipairs(clearLines) do
 			t.setCursor(1, v3)
 			t.clearLine()
-			if v3 ~= 13 then
-				print(fisrStatsNames[v3-1], fisrStats[fisrStatsNames[v3-1]])
+			if v3 ~= 12 then
+				print(fisrStatsNames[v3-1] .. fisrStats[fisrStatsNames[v3-1]])
 			else
-				print(fuelInfoNames[v3-8], fuelInfo[fuelInfoNames[v3-8]])
+				print(fuelInfoNames[v3-9] .. fuelInfo[fuelInfoNames[v3-9]])
 			end
 		end
-		os.sleep(1)
+		os.sleep(0.7)
 	end
 end
+
+t.clear()
+fisrInit()
+fisrRun()
 		
 		
 	
