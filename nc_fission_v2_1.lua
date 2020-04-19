@@ -12,8 +12,6 @@ local mult_rf = fisr.getEfficiency() .. "%"
 local mult_hu = fisr.getHeatMultiplier() .. "%"
 local no_cells = fisr.getNumberOfCells()
 
-
-
 function fuelStats()
 	fuel = fisr.getFissionFuelName()
 	fuel_base = string.format("%s RF/t - %s HU/t", fisr.getFissionFuelPower(), fisr.getFissionFuelHeat())
@@ -27,7 +25,7 @@ function currentProcess()
 	hu = fisr.getHeatLevel()
 	rf_lvl = string.format("%s/%s RF", rf, max_rf)
 	hu_lvl = string.format("%s/%s HU", hu, max_hu)
-	timeleft = (fisr.getReactorProcessTime() - fisr.getCurrentProcessTime()/no_cells)/20 .. " sec"
+	timeleft = (fisr.getReactorProcessTime() - fisr.getCurrentProcessTime()/no_cells)/20
 	return rf, hu, timeleft
 end
 
@@ -40,8 +38,7 @@ function reactorControl()
 end
 
 function reactorStatus()
-	status = fisr.isProcessing()
-	if status then
+	if fisr.isProcessing() then
 		stat = "Active"
 	else
 		if hu/max_hu > 0.2 then
@@ -87,10 +84,10 @@ function fisrRun()
 		for i = 1, 4 do
 			t.setCursor(1, clearLines[i])
 			t.clearLine()
-			if clearLines[i] ~= 14 then
-				print(fisrStatsNames[v3-1] .. fisrStats[fisrStatsNames[v3-1]])
+			if i ~= 4 then
+				print(fisrStatsNames[i+4] .. fisrStats[i+4]])
 			else
-				print(fuelInfoNames[v3-9] .. fuelInfo[fuelInfoNames[v3-9]])
+				print(fuelInfoNames[i+1] .. fuelInfo[fuelInfoNames[i+1]])
 			end
 		end
 		os.sleep(0.7)
@@ -101,5 +98,3 @@ t.clear()
 fisrInit()
 fisrRun()
 		
-		
-	
