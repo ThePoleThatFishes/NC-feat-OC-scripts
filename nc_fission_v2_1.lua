@@ -12,13 +12,10 @@ local mult_rf = fisr.getEfficiency() .. "%"
 local mult_hu = fisr.getHeatMultiplier() .. "%"
 local no_cells = fisr.getNumberOfCells()
 
-function fuelStats()
-	fuel = fisr.getFissionFuelName()
-	fuel_base = string.format("%s RF/t - %s HU/t", fisr.getFissionFuelPower(), fisr.getFissionFuelHeat())
-	rf_t = fisr.getReactorProcessPower() .. " RF/t"
-	net_hu = fisr.getReactorProcessHeat() .. " HU/t"
-	return fuel, fuel_rf_t, fuel_hu_t, rf_t, net_hu
-end
+local fuel = fisr.getFissionFuelName()
+local fuel_base = string.format("%s RF/t - %s HU/t", fisr.getFissionFuelPower(), fisr.getFissionFuelHeat())	
+local rf_t = fisr.getReactorProcessPower() .. " RF/t"
+local net_hu = fisr.getReactorProcessHeat() .. " HU/t"
 
 function currentProcess()
 	rf = fisr.getEnergyStored()
@@ -26,7 +23,6 @@ function currentProcess()
 	rf_lvl = string.format("%s/%s RF", rf, max_rf)
 	hu_lvl = string.format("%s/%s HU", hu, max_hu)
 	timeleft = (fisr.getReactorProcessTime() - fisr.getCurrentProcessTime()/no_cells)/20
-	return rf, hu, timeleft
 end
 
 function reactorControl()
@@ -49,14 +45,13 @@ function reactorStatus()
 			stat = "Inactive - " .. fisr.getProblem()
 		end
 	end
-	return stat
 end
 
 function infoOutput()
 	fisrStatsNames = {"Size: ", "Cells: ", "Eff. Mult.: ", "Heat Mult.: ", "Energy: ", "Heat Level: ", "Status: "}
 	fisrStats = {size, no_cells, mult_rf, mult_hu, rf_lvl, hu_lvl, stat}
 	fuelInfoNames = {"Fuel: ", "Base Power-Heat: ", "Energy Gen: ", "Net Heat: ", "Time Left: "}
-	fuelInfo = {fuel, fuel_base, rf_t, net_hu, timeleft}
+	fuelInfo = {fuel, fuel_base, rf_t, net_hu, timeleft .. " sec"}
 end
 
 function fisrInit()
@@ -64,6 +59,7 @@ function fisrInit()
 	currentProcess()
 	reactorControl()
 	reactorStatus()
+	infoOutput()
 	print("Reactor Info")
 	for i = 1, 7 do
 		print(fisrStatsNames[i] .. fisrStats[i])
@@ -85,9 +81,9 @@ function fisrRun()
 			t.setCursor(1, clearLines[i])
 			t.clearLine()
 			if i ~= 4 then
-				print(fisrStatsNames[i+4] .. fisrStats[i+4]])
+				print(fisrStatsNames[i+4] .. fisrStats[i+4])
 			else
-				print(fuelInfoNames[i+1] .. fuelInfo[fuelInfoNames[i+1]])
+				print(fuelInfoNames[i+1] .. fuelInfo[i+1])
 			end
 		end
 		os.sleep(0.7)
