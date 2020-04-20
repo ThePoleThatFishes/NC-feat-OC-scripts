@@ -25,12 +25,13 @@ function stats()
 	fusrI = {size, string.format("%s/%s", fuel1, fuel2), string.format("%s RF/t - %s t", combo_rf, combo_time), string.format("%s MK/%s MK", tempMK, bestMK),
 		string.format("%.1f RF/t", rf_t), string.format("%.3f", eff), stat}
 end
- 
+
+stats()
 for i = 1, 3 do
 	print(fusrINames[i] .. fusrI[i])
 end
 
-timer = 1200 --can run for 10 mins straight
+timer = 1200 --placeholder condition, will replace once keyboard events are a thing!
 while timer > 0 do
 	stats()
 	if (1 - tempMK/bestMK) < 0.002 then
@@ -47,6 +48,3 @@ while timer > 0 do
 	timer = timer - 1
 end
 
-		
-
-	
