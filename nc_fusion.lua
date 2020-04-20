@@ -14,7 +14,7 @@ function stats()
 	rf_t = fusr.getReactorProcessPower()
 	eff = fusr.getEfficiency()/100
 	tempMK = fusr.getTemperature()/1e6
-	if fusr.isActive() then
+	if fusr.isProcessing() then
 		stat = "Active"
 	elseif (1 - tempMK/bestMK) < 0.002 then
 		stat = "Inactive - Cooling Down"
@@ -22,14 +22,15 @@ function stats()
 		stat = fusr.getProblem()
 	end
 	fusrINames = {"Size: ", "Fuel Combo: ", "Combo RF/t - Lifetime: ", "Temp/Optimal Temp: ", "Energy Gen: ", "Efficiency: ", "Status: "}
-	fusrI = {size, string.format("%s/%s", fuel1, fuel2), string.format("%s RF/t - %s t", combo_rf, combo_time), string.format("%s MK/%s MK", tempMK, bestMK), rf_t .. " RF/t", string.format("%.3f", eff), stat}
+	fusrI = {size, string.format("%s/%s", fuel1, fuel2), string.format("%s RF/t - %s t", combo_rf, combo_time), string.format("%s MK/%s MK", tempMK, bestMK),
+		string.format("%.1f RF/t", rf_t), string.format("%.3f", eff), stat}
 end
  
 for i = 1, 3 do
 	print(fusrINames[i] .. fusrI[i])
 end
 
-timer = 50
+timer = 1200 --can run for 10 mins straight
 while timer > 0 do
 	stats()
 	if (1 - tempMK/bestMK) < 0.002 then
