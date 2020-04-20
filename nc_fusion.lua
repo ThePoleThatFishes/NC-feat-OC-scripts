@@ -24,8 +24,7 @@ function stats()
 end
  
 fusrINames = {"Size: ", "Fuel Combo: ", "Combo RF/t - Lifetime: ", "Temp/Optimal Temp: ", "Energy Gen: ", "Efficiency: ", "Status: "}
-fusrI = {size, string.format("%s/%s", fuel1, fuel2), string.format("%s RF/t - %s t", combo_rf, combo_time),
- string.format("%s MK/%s MK", tempMK, bestMK), rf_t .. " RF/t", string.format("%.3f", eff), stat)
+fusrI = {size, string.format("%s/%s", fuel1, fuel2), string.format("%s RF/t - %s t", combo_rf, combo_time), string.format("%s MK/%s MK", tempMK, bestMK), rf_t .. " RF/t", string.format("%.3f", eff), stat}
 for i = 1, 3 do
 	print(fusrINames[i] .. fusrI[i])
 end
