@@ -19,7 +19,7 @@ local function fusrStats()
 	combo_time = fusr.getFusionComboTime()
 end
 
-function stats()
+local function stats()
 	rf_t = fusr.getReactorProcessPower()
 	eff = fusr.getEfficiency()/100
 	tempMK = fusr.getTemperature()/1e6
@@ -43,8 +43,7 @@ for i = 1, 3 do
 	print(fusrINames[i] .. fusrI[i])
 end
 
-k = 1
-while k > 0 do
+while true do
 	local ev, ad, chr, code, player = event.pull(0.5)
 	if ev == "key_down" and chr == 113 then
 		print("Quitting...")
