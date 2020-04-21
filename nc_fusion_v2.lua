@@ -25,7 +25,7 @@ function stats()
 	tempMK = fusr.getTemperature()/1e6
 	if fusr.isProcessing() then
 		stat = "Active"
-	elseif (1 - tempMK/bestMK) < 0.002 then
+	elseif (1 - tempMK/bestMK) < 0.002 or tempMK >= 19500 then
 		stat = "Inactive - Cooling"
 	elseif tempMK < 8 then
 		stat = "Inactive - Has not ignited"
