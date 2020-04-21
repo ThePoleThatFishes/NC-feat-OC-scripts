@@ -82,7 +82,7 @@ function fisrInit()
 		print(fisrStatsNames[i] .. fisrStats[i])
 	end
 	print("Fuel Info")
-	for i = 1, 5
+	for i = 1, 5 do
 		print(fuelInfoNames[i] .. fuelInfo[i])	
 	end
 end
