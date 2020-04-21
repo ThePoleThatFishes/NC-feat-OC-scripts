@@ -32,3 +32,7 @@ A: No, scripts will stay text-only to reduce resource costs. No fancy graphics l
 
 A: Just like with MSR-related scripts, maybe.
 
+**Q: What are legacy-versions?**
+
+A: As the name implies, it's older versions of the scripts, with fewer features (and more bugs probably!), and as such they are deprecated, I suggest not downloading them!
+
