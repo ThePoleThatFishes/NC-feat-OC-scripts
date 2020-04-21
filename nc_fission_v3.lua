@@ -27,7 +27,6 @@ local function fuelStats()
 	fuel_base = string.format("%s RF/t - %s HU/t", fisr.getFissionFuelPower(), fisr.getFissionFuelHeat())
 	rf_t = fisr.getReactorProcessPower() .. " RF/t"
 	net_hu = fisr.getReactorProcessHeat() .. " HU/t"
-	return fuel, fuel_rf_t, fuel_hu_t, rf_t, net_hu
 end
 
 local function currentProcess()
@@ -36,7 +35,6 @@ local function currentProcess()
 	rf_lvl = string.format("%s/%s RF", rf, max_rf)
 	hu_lvl = string.format("%s/%s HU", hu, max_hu)
 	timeleft = (fisr.getReactorProcessTime() - fisr.getCurrentProcessTime()/no_cells)/20
-	return rf, hu, timeleft
 end
 
 local function reactorControl()
@@ -61,7 +59,6 @@ local function reactorStatus()
 			stat = "Inactive - " .. fisr.getProblem()
 		end
 	end
-	return stat
 end
 
 local function infoOutput()
@@ -88,6 +85,7 @@ function fisrInit()
 end
 
 function fisrRun()
+	local clearLines = {6, 7, 8, 14}
 	while k > 0 do
 		local ev, ad, chr, code, player = event.pull(0.35)
 		if ev == "key_down" and chr == 113 then
@@ -102,7 +100,6 @@ function fisrRun()
 		reactorControl()
 		reactorStatus()
 		infoOutput()
-		local clearLines = {6, 7, 8, 14}
 		for i = 1, 4 do
 			t.setCursor(1, clearLines[i])
 			t.clearLine()
@@ -119,6 +116,5 @@ end
 t.clear()
 fisrInit()
 fisrRun()
-		
 		
 	
