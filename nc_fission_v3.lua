@@ -19,8 +19,6 @@ local max_hu = fisr.getMaxHeatLevel()
 local mult_rf = fisr.getEfficiency() .. "%"
 local mult_hu = fisr.getHeatMultiplier() .. "%"
 local no_cells = fisr.getNumberOfCells()
-local k = 1
-
 
 local function fuelStats()
 	fuel = fisr.getFissionFuelName()
@@ -86,7 +84,7 @@ end
 
 function fisrRun()
 	local clearLines = {6, 7, 8, 14}
-	while k > 0 do
+	while true do
 		local ev, ad, chr, code, player = event.pull(0.35)
 		if ev == "key_down" and chr == 113 then
 			print("Quitting...")
@@ -116,5 +114,3 @@ end
 t.clear()
 fisrInit()
 fisrRun()
-		
-	
