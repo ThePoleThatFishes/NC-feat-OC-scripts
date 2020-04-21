@@ -4,7 +4,8 @@ local event = require("event")
 local fusr = c.nc_fusion_reactor
 
 print("Welcome to Fusion Controller v2 by ThePoleThatFishes!")
-print("Hold down Q to quit, U to force updates. (If stats are looking wrong!")
+print("Hold down Q to quit, U to force updates. (If stats are looking wrong!)")
+os.sleep(1)
 print("This message will self destruct in 5 seconds.")
 os.sleep(5)
 t.clear()
@@ -49,7 +50,7 @@ while k > 0 do
 		print("Quitting...")
 		break
 	end
-	if ev == "key_down" and chr = 117 then
+	if ev == "key_down" and chr == 117 then
 		fusrStats()
 		t.clear()
 		for i = 1,7 do
@@ -70,6 +71,3 @@ while k > 0 do
 	os.sleep(0.5)
 end
 
-		
-
-	
