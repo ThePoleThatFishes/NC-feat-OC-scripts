@@ -15,8 +15,8 @@ local function fusrStats()
 	fuel1 = fusr.getFirstFusionFuel()
 	fuel2 = fusr.getSecondFusionFuel()
 	bestMK = fusr.getFusionComboHeatVariable()*1.21875567483
-	combo_rf = fusr.getFusionComboPower()*100
-	combo_time = fusr.getFusionComboTime()
+	combo_rf = fusr.getFusionComboPower()*100*size --combo RF/t and time are shown proportional to toroid size and not to base!
+	combo_time = fusr.getFusionComboTime()/size
 end
 
 local function stats()
@@ -33,7 +33,7 @@ local function stats()
 		stat = "Inactive - Out of fuel"
 	end
 	fusrINames = {"Toroid Size: ", "Fuel Combo: ", "Combo RF/t - Lifetime: ", "Temp/Optimal Temp: ", "Energy Gen: ", "Efficiency: ", "Status: "}
-	fusrI = {size, string.format("%s/%s", fuel1, fuel2), string.format("%s RF/t - %s t", combo_rf, combo_time),
+	fusrI = {size, string.format("%s/%s", fuel1, fuel2), string.format("%s RF/t - %.2f t", combo_rf, combo_time),
 				string.format("%.1f MK/%.1f MK", tempMK, bestMK), string.format("%.1f RF/t", rf_t), string.format("%.3f", eff), stat}
 end
 
