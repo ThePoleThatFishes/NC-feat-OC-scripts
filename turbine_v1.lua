@@ -37,7 +37,7 @@ local function process()
 	end
 	statsNames = {"Size: ", "Expansion: ", "Coil Efficiency: ", "Energy Stored: ", "Energy Gen: ", "Steam Input: ", "Eco Mode: "}
 	stats = {size, string.format("x%.3f/x%.3f", ex, optEx), string.format("%.3f", coilEff), string.format("%s/%s RF", rf, maxRF)
-	, rfT .. " RF/t", steamIn .. " mb/t", eco}
+	, string.format("%.1f RF/t", rfT), steamIn .. " mB/t", eco}
 end
 
 process()
@@ -61,7 +61,7 @@ while true do
 			print(statsNames[i] .. stats[i])
 		end
 	end
-	if ev == "key_down" and chr = 97 then
+	if ev == "key_down" and chr == 97 then
 		if eco == "On" then
 			eco = "Off"
 		else
