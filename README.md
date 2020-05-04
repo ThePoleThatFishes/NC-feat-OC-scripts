@@ -20,7 +20,7 @@ Have any feature requests/bug reports? Create an issue or find me at the Nuclear
 3. The script is successfully installed in your computer, all you need to do is connect the controller block to the computer using cables, and run the script!
 
 # FAQ #
-**Q: Is a MSR/HX/Turbine script planned?**
+**Q: Is a MSR/HX script planned?**
 
 A: Not at the moment, but maybe.
 
@@ -30,7 +30,7 @@ A: No, scripts will stay text-only to reduce resource costs. No fancy graphics l
 
 **Q: Will you make overhaul scripts?**
 
-A: Just like with MSR-related scripts, maybe.
+A: Not for the time being. I am waiting on NC:O to be feature complete, and have OC support.
 
 **Q: What are legacy-versions?**
 
