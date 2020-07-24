@@ -21,7 +21,7 @@ end
 
 local function stats()
 	rf_t = fusr.getReactorProcessPower()
-	eff = fusr.getEfficiency()/100
+	eff = fusr.getEfficiency()
 	tempMK = fusr.getTemperature()/1e6
 	if fusr.isProcessing() then
 		stat = "Active"
@@ -34,7 +34,7 @@ local function stats()
 	end
 	fusrINames = {"Toroid Size: ", "Fuel Combo: ", "Combo RF/t - Lifetime: ", "Temp/Optimal Temp: ", "Energy Gen: ", "Efficiency: ", "Status: "}
 	fusrI = {size, string.format("%s/%s", fuel1, fuel2), string.format("%s RF/t - %.2f t", combo_rf, combo_time),
-				string.format("%.1f MK/%.1f MK", tempMK, bestMK), string.format("%.1f RF/t", rf_t), string.format("%.3f", eff), stat}
+				string.format("%.1f MK/%.1f MK", tempMK, bestMK), string.format("%.1f RF/t", rf_t), string.format("%.1f%%", eff), stat}
 end
 
 fusrStats()
@@ -57,7 +57,7 @@ while true do
 		end
 	end
 	stats()
-	if (1 - tempMK/bestMK) < 0.002 then
+	if (1 - tempMK/bestMK) < 0.002 or tempMK >= 19500 then
 		fusr.deactivate()
 	else
 		fusr.activate()
