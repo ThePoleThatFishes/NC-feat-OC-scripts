@@ -31,6 +31,7 @@ A: No, scripts will stay text-only to reduce resource costs. No fancy graphics l
 **Q: Will you make overhaul scripts?**
 
 A: Not for the time being. I am waiting on NC:O to be feature complete, and have OC support.
+The turbine's OC port seems to work like its preoverhaul counterpart, and some testing shows the turbine script also works for overhaul!
 
 **Q: What are legacy-versions?**
 
