@@ -16,9 +16,9 @@ local x = turb.getLengthX()
 local y = turb.getLengthY()
 local z = turb.getLengthZ()
 local size = string.format("%s*%s*%s", x, y, z)
-local coilEff = turb.getCoilConductivity()
-local ex = turb.getTotalExpansionLevel()
-local optEx = turb.getIdealTotalExpansionLevel()
+local coilEff = turb.getCoilConductivity()*100
+local ex = turb.getTotalExpansionLevel()*100
+local optEx = turb.getIdealTotalExpansionLevel()*100
 local maxRF = turb.getEnergyCapacity()
 local eco = "Off"
 
@@ -36,7 +36,7 @@ local function process()
 		turb.activate()
 	end
 	statsNames = {"Size: ", "Expansion: ", "Coil Efficiency: ", "Energy Stored: ", "Energy Gen: ", "Steam Input: ", "Eco Mode: "}
-	stats = {size, string.format("x%.3f/x%.3f", ex, optEx), string.format("%.3f", coilEff), string.format("%s/%s RF", rf, maxRF)
+	stats = {size, string.format("%.3f%%/%.3f%%", ex, optEx), string.format("%.3f%%", coilEff), string.format("%s/%s RF", rf, maxRF)
 	, string.format("%.1f RF/t", rfT), steamIn .. " mB/t", eco}
 end
 
