@@ -22,10 +22,27 @@ local optEx = turb.getIdealTotalExpansionLevel()*100
 local maxRF = turb.getEnergyCapacity()
 local eco = "Off"
 
+local function prefix(unit)
+	if unit > 1e9 then
+		return string.format("%.1fG", unit/1e9)
+	elseif unit > 1e6 then
+		return string.format("%.1fM", unit/1e6)
+	elseif unit > 1e4 then
+		return string.format("%.1fk", unit/1e3)
+	else
+		return string.format("%.1f", unit)
+	end
+end
+		
 local function process()
 	steamIn = turb.getInputRate()
 	rfT = turb.getPower()
 	rf = turb.getEnergyStored()
+	if steamIn == 0 then
+		density = 0
+	else
+		density = rfT/steamIn
+	end
 	if eco == "On" then
 		if rf/maxRF > 0.75 then
 			turb.deactivate()
@@ -35,9 +52,9 @@ local function process()
 	else
 		turb.activate()
 	end
-	statsNames = {"Size: ", "Expansion: ", "Coil Efficiency: ", "Energy Stored: ", "Energy Gen: ", "Steam Input: ", "Eco Mode: "}
-	stats = {size, string.format("%.3f%%/%.3f%%", ex, optEx), string.format("%.3f%%", coilEff), string.format("%s/%s RF", rf, maxRF)
-	, string.format("%.1f RF/t", rfT), steamIn .. " mB/t", eco}
+	statsNames = {"Size: ", "Expansion: ", "Coil Efficiency: ", "Energy Stored: ", "Energy Gen: ", "Steam Input: ", "Energy Density: ", "Eco Mode: "}
+	stats = {size, string.format("%.2f%%/%.2f%%", ex, optEx), string.format("%.2f%%", coilEff), string.format("%s/%s RF", prefix(rf), prefix(maxRF))
+	, string.format("%s RF/t", prefix(rfT)), string.format("%s mB/t", steamIn), string.format("%.2f RF/mB", density), eco}
 end
 
 process()
@@ -55,7 +72,7 @@ while true do
 	end
 	if ev == "key_down" and chr == 117 then
 		process()
-		for i = 4, 7 do
+		for i = 1, 8 do
 			t.setCursor(1,i+1)
 			t.clearLine()
 			print(statsNames[i] .. stats[i])
@@ -69,7 +86,7 @@ while true do
 		end
 	end
 	process()
-	for i = 4, 7 do
+	for i = 4, 8 do
 		t.setCursor(1,i+1)
 		t.clearLine()
 		print(statsNames[i] .. stats[i])
