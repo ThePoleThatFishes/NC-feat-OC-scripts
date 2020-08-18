@@ -1,7 +1,13 @@
 # NC-feat-OC-scripts #
-A repo of OC scripts for NuclearCraft's reactors!
+A repo of OC scripts for NuclearCraft's multiblocks!
 
-Here you will find OpenComputers scripts, written in Lua, for controlling NuclearCraft pre-overhaul solid fission and fusion reactors.
+Here you will find OpenComputers scripts for NuclearCraft multiblocks, to control the fission reactor, the fusion reactor and the turbine!
+
+You can also find a turbine calculator script to help you plan a turbine! To use the script, download it on your computer as said below, then execute the following:
+
+`[name of file] (ideal expansion, can be decimal) (energy density of steam, can be decimal) (turbine blades separated by spaces, valid blades: stator, steel, extreme, sic)`
+
+Example: `turbinecalc 2 4.5 steel extreme steel`
 
 Nuclearcraft Pre-overhaul: https://www.curseforge.com/minecraft/mc-mods/nuclearcraft-mod
 
